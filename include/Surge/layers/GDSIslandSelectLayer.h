@@ -139,4 +139,5 @@ public:
 	void updatePageWithObject(CCObject* page, CCObject* object) override;
 	void onEnterTransitionDidFinish() override;
 	void updatePageButtons();
+	void updateProgressionStatus();
 };
