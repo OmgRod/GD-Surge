@@ -50,7 +50,7 @@ bool MyLoadingLayer::init(bool fromReload) {
 }
 
 const char* MyLoadingLayer::getLoadingString() {
-    std::vector<std::string> messages = {
+    constexpr std::array messages = {
         "Check your daily chests!",
         "Stay out of the vault.",
         "Tap fast to avoid dying.",
@@ -72,5 +72,5 @@ const char* MyLoadingLayer::getLoadingString() {
         "Retry. Retry. Retry.",
         "Some levels hide secrets.",
     };
-    return messages.at(rand() % messages.size()).c_str();
+    return messages.at(rand() % messages.size());
 }

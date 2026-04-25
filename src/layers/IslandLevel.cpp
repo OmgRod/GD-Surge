@@ -4,13 +4,35 @@
 
 using namespace geode::prelude;
 
-bool IslandLevel::setup(GJGameLevel* level, CCMenuItemSpriteExtra* button) {
+bool IslandLevel::init(GJGameLevel* level, CCMenuItemSpriteExtra* button) {
+    if (!Popup::init(300.f, 260.f)) return false;
+
+    if (!level) {
+        log::error("Level is null in IslandLevel::init");
+        return false;
+    }
     m_level = level;
+
+    if (!m_level->m_levelName.empty()) {
+        setTitle(m_level->m_levelName);
+    } else {
+        setTitle("Unnamed Level");
+    }
+
     setID("IslandLevel"_spr);
 
     auto GLM = GameLevelManager::sharedState();
+    if (!m_mainLayer || m_mainLayer->getChildren()->count() == 0) {
+        log::error("Main layer or its children are invalid in IslandLevel::init");
+        return false;
+    }
 
     auto BG = typeinfo_cast<CCScale9Sprite*>(m_mainLayer->getChildren()->objectAtIndex(0));
+    if (!BG) {
+        log::error("Failed to cast BG in IslandLevel::init");
+        return false;
+    }
+
     auto m_buttonMenu = CCMenu::create();
     auto corner1 = CCSprite::createWithSpriteFrameName("dailyLevelCorner_001.png");
     auto director = CCDirector::sharedDirector();
@@ -237,14 +259,12 @@ bool IslandLevel::setup(GJGameLevel* level, CCMenuItemSpriteExtra* button) {
 
     log::debug("Stars: {}", m_level->m_stars);
 
-    setTitle(m_level->m_levelName);
-
     return true;
 }
 
 IslandLevel* IslandLevel::create(GJGameLevel* level, CCMenuItemSpriteExtra* button) {
     auto ret = new IslandLevel();
-    if (ret && ret->initAnchored(300.f, 260.f, level, button)) {
+    if (ret && ret->init(level, button)) {
         ret->autorelease();
         return ret;
     }

@@ -15,7 +15,7 @@ bool jumpedAlready = false;
 bool downloadStarted = false;
 bool startup = false;
 
-static auto activeListeners = std::make_shared<std::vector<std::shared_ptr<EventListener<web::WebTask>>>>();
+static auto activeListeners = std::make_shared<std::vector<std::shared_ptr<async::TaskHolder<web::WebResponse>>>>();
 
 bool MyMenuLayer::init() {
     if (!MenuLayer::init()) return false;

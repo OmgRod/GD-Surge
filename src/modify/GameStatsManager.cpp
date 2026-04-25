@@ -15,7 +15,7 @@ void MyGameStatsManager::checkCoinAchievement(GJGameLevel* level) {
     int coinPercent = (getCollectedCoinsForLevel(level) / 3.f) * 100.f;
     auto achievementID = fmt::format("geometry.ach.surge.levelcoin{:02}", level->m_levelID.value());
 
-    if(level->m_levelType == GJLevelType::Local) {
+    if(level->m_levelType == GJLevelType::Saved) {
         GM->reportAchievementWithID(achievementID.c_str(), coinPercent, false);
     }
 }

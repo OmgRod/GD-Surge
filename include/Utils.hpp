@@ -50,7 +50,7 @@ namespace surge {
 
         cocos2d::CCDictionary* currencyScores;
         if (dailyId <= 0) {
-            if (level->m_levelType == GJLevelType::Local) {
+            if (level->m_levelType == GJLevelType::Saved) {
                 currencyScores = gsm->m_mainCurrencyScores;
             } else if (level->m_gauntletLevel) {
                 currencyScores = gsm->m_gauntletCurrencyScores;

@@ -224,8 +224,8 @@ std::vector<MySecretLayer::VaultCode> MySecretLayer::vaultCodes = {
         },
         []() -> bool { return !(AchievementManager::sharedState()->isAchievementEarned("geometry.ach.surge.vault04")); },
         []() -> const char* {
-            std::string formatted = fmt::format("The final truth, only for you to see, {}", GameManager::sharedState()->m_playerName);
-            return formatted.c_str();
+            auto formatted = fmt::format("The final truth, only for you to see, {}", GameManager::sharedState()->m_playerName).c_str();
+            return formatted;
         },
         [](MySecretLayer* self) {
             GameManager::sharedState()->reportAchievementWithID("geometry.ach.surge.vault04", 100, false);

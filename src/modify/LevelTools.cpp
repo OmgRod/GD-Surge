@@ -218,7 +218,7 @@ GJGameLevel* MyLevelTools::getLevel(int levelID, bool loaded) {
         level->m_levelString = LocalLevelManager::sharedState()->getMainLevelString(levelID);
     }
     level->m_levelID = levelID;
-    level->m_levelType = GJLevelType::Local;
+    level->m_levelType = GJLevelType::Saved;
     return level;
 }
 

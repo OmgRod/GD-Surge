@@ -347,7 +347,7 @@ bool GDSIslandSelectLayer::init(int page) {
         m_points.level2PathPoint5->setOpacity(0);
     }
     /*dashlandsmenu->addChild(particles, 2);*/
-    // Establecer la escala inicial como 0 para que est�n invisibles
+    // Establecer la escala inicial como 0 para que estn invisibles
     
     m_iLevels.level4Btn = CCMenuItemSpriteExtra::create(CCSprite::createWithSpriteFrameName("islandLevelBtn_001.png"_spr), this, menu_selector(GDSIslandSelectLayer::onIslandLevel));
 
@@ -1404,6 +1404,14 @@ void GDSIslandSelectLayer::keyBackClicked() {
 void GDSIslandSelectLayer::onIslandLevel(CCObject* sender) {
     CCMenuItemSpriteExtra* button = typeinfo_cast<CCMenuItemSpriteExtra*>(sender);
     auto GLM = GameLevelManager::sharedState();
+
+    // Retrieve the level using getMainLevel
+    auto level = GLM->getMainLevel(button->getTag(), true);
+    if (!level) {
+        log::error("Failed to retrieve level in GDSIslandSelectLayer::onIslandLevel");
+        return;
+    }
+
     IslandLevel::create(level, button)->show();
 }
 
